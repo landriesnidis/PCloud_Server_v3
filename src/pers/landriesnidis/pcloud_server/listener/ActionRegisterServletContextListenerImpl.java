@@ -4,11 +4,12 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import pers.landriesnidis.pcloud_server.action.ActionManager;
+import pers.landriesnidis.pcloud_server.action.DownloadAction;
 import pers.landriesnidis.pcloud_server.action.FolderMenuAction;
 import pers.landriesnidis.pcloud_server.action.UserLoginAction;
 import pers.landriesnidis.pcloud_server.action.UserLogoutAction;
 import pers.landriesnidis.pcloud_server.action.UserRegisterAction;
-import pers.landriesnidis.pcloud_server.action.UserUploadAction;
+import pers.landriesnidis.pcloud_server.action.UploadAction;
 
 public class ActionRegisterServletContextListenerImpl  implements ServletContextListener{
 
@@ -40,7 +41,11 @@ public class ActionRegisterServletContextListenerImpl  implements ServletContext
 		manager.registerAction(GET , FolderMenuAction.class);
 		manager.registerAction(POST, FolderMenuAction.class);
 		
-		//用户上传
-		manager.registerAction(POST, UserUploadAction.class);
+		//下载
+		manager.registerAction(GET , DownloadAction.class);
+		manager.registerAction(POST, DownloadAction.class);
+		
+		//上传
+		manager.registerAction(POST, UploadAction.class);
 	}
 }

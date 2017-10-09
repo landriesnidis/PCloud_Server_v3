@@ -80,7 +80,7 @@ public abstract class BaseServletAction {
 		//直接读取请求的结果
 		String value = request.getParameter(key);
 		//判断请求的方法
-		if(method.equals("GET")){
+		if(method.equals("GET") && value!=null){
 			try {
 				value = new String(value.getBytes("ISO8859-1"),encode);
 				return value;

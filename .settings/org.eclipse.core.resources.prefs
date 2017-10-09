@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//WebRoot/index.jsp=UTF-8
 encoding//src/org/nisita/mysql/connection.properties=UTF-8
+encoding//src/pers/landriesnidis/pcloud_server/action/DownloadAction.java=UTF-8
 encoding//src/pers/landriesnidis/pcloud_server/action/FolderMenuAction.java=UTF-8
 encoding//src/pers/landriesnidis/pcloud_server/action/UserLoginAction.java=UTF-8
 encoding//src/pers/landriesnidis/pcloud_server/action/UserLogoutAction.java=UTF-8

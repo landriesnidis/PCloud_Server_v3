@@ -190,6 +190,18 @@ public class SqlQueryHelper {
 		}
 	}
 	
+	public static String GetFilePathById(final String token ,final int fileid) throws SQLException{
+		DBAction action = new DBAction();
+		List<HashMap<String,Object>> lm = action.exeQuery("SELECT GetFilePathById(?,?) As result;",new DBAction.ParameterSetter() {
+			@Override
+			public void setParameter(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, token);
+				pstmt.setInt(2, fileid);
+			}
+		});
+		return (String) lm.get(0).get("result");
+	}
+	
 	/**
 	 * 文件重命名
 	 * @param token
@@ -260,14 +272,15 @@ public class SqlQueryHelper {
 	 * @param filesize
 	 * @throws SQLException
 	 */
-	public static void FileUpload(final String token ,final String filemd5, final long filesize) throws SQLException{
+	public static void FileUpload(final String token, final String filepath, final String filemd5, final long filesize) throws SQLException{
 		DBAction action = new DBAction();
-		action.exeUpdate("CALL FileUpload(?,?,?);",new DBAction.ParameterSetter() {
+		action.exeUpdate("CALL FileUpload(?,?,?,?);",new DBAction.ParameterSetter() {
 			@Override
 			public void setParameter(PreparedStatement pstmt) throws SQLException {
 				pstmt.setString(1, token);
 				pstmt.setString(2, filemd5);
-				pstmt.setLong(3, filesize);
+				pstmt.setString(3, filemd5);
+				pstmt.setLong(4, filesize);
 				
 			}
 		});

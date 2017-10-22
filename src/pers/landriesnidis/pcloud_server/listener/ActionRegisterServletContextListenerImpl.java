@@ -1,11 +1,17 @@
 package pers.landriesnidis.pcloud_server.listener;
 
+import javax.decorator.Delegate;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import pers.landriesnidis.pcloud_server.action.ActionManager;
+import pers.landriesnidis.pcloud_server.action.CopyFileAction;
+import pers.landriesnidis.pcloud_server.action.CreateFolderAction;
+import pers.landriesnidis.pcloud_server.action.DeleteFileAction;
 import pers.landriesnidis.pcloud_server.action.DownloadAction;
 import pers.landriesnidis.pcloud_server.action.FolderMenuAction;
+import pers.landriesnidis.pcloud_server.action.MoveFileAction;
+import pers.landriesnidis.pcloud_server.action.RenameFileAction;
 import pers.landriesnidis.pcloud_server.action.UserLoginAction;
 import pers.landriesnidis.pcloud_server.action.UserLogoutAction;
 import pers.landriesnidis.pcloud_server.action.UserRegisterAction;
@@ -47,5 +53,25 @@ public class ActionRegisterServletContextListenerImpl  implements ServletContext
 		
 		//上传
 		manager.registerAction(POST, UploadAction.class);
+		
+		//文件拷贝
+		manager.registerAction(GET , CopyFileAction.class);
+		manager.registerAction(POST, CopyFileAction.class);
+		
+		//创建新文件夹
+		manager.registerAction(GET , CreateFolderAction.class);
+		manager.registerAction(POST, CreateFolderAction.class);
+		
+		//文件重命名
+		manager.registerAction(GET , RenameFileAction.class);
+		manager.registerAction(POST, RenameFileAction.class);
+		
+		//删除文件
+		manager.registerAction(GET , DeleteFileAction.class);
+		manager.registerAction(POST, DeleteFileAction.class);
+		
+		//移动文件
+		manager.registerAction(GET , MoveFileAction.class);
+		manager.registerAction(POST, MoveFileAction.class);
 	}
 }

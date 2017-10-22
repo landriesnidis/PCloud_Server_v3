@@ -46,7 +46,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 用户登录
+	 * TODO 用户登录
 	 * @param account	用户名
 	 * @param password	密码
 	 * @return			token
@@ -65,7 +65,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 用户登出
+	 * TODO 用户登出
 	 * @param token	
 	 * @return
 	 * @throws SQLException
@@ -83,7 +83,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 注册用户
+	 * TODO 注册用户
 	 * @param account	用户名
 	 * @param password	密码
 	 * @return			token
@@ -102,7 +102,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 通过文件夹id获取子文件夹列表
+	 * TODO 通过文件夹id获取子文件夹列表
 	 * @param token
 	 * @param folderid
 	 * @return
@@ -137,7 +137,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 通过文件夹id获取文件列表
+	 * TODO 通过文件夹id获取文件列表
 	 * @param token
 	 * @param folderid
 	 * @return
@@ -172,7 +172,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 通过文件夹id获取文件夹内所有的子文件夹和文件
+	 * TODO 通过文件夹id获取文件夹内所有的子文件夹和文件
 	 * @param token
 	 * @param folderid
 	 * @return
@@ -203,7 +203,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 文件重命名
+	 * TODO 文件重命名
 	 * @param token
 	 * @param folderid
 	 * @param fileid
@@ -227,7 +227,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 查询文件是否存在
+	 * TODO 查询文件是否存在
 	 * @param md5
 	 * @return
 	 * @throws SQLException
@@ -245,7 +245,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 为用户添加所属的文件记录
+	 * TODO 为用户添加所属的文件记录
 	 * @param token
 	 * @param filemd5
 	 * @param filename
@@ -266,7 +266,7 @@ public class SqlQueryHelper {
 	}
 	
 	/**
-	 * 文件上传记录
+	 * TODO 文件上传记录
 	 * @param token
 	 * @param filemd5
 	 * @param filesize
@@ -285,5 +285,84 @@ public class SqlQueryHelper {
 			}
 		});
 	}
+	
+	public static boolean CopyFile(final String token,final String folder1,final String folder2,final String fileid) throws SQLException{
+		DBAction action = new DBAction();
+		List<HashMap<String,Object>> lm = action.exeQuery("SELECT UserCopyFile(?,?,?,?) AS result;", new DBAction.ParameterSetter() {
+			
+			@Override
+			public void setParameter(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, token);
+				pstmt.setString(2, folder1);
+				pstmt.setString(3, folder2);
+				pstmt.setString(4, fileid);
+			}
+		});
+		int result = (Integer)lm.get(0).get("result");
+		return result==1;
+	}
+	
+	public static int CreateFolder(final String token,final String folderid,final String newfoldername) throws SQLException{
+		DBAction action = new DBAction();
+		List<HashMap<String,Object>> lm = action.exeQuery("SELECT UserCreateFolder(?,?,?) AS result;", new DBAction.ParameterSetter() {
+			
+			@Override
+			public void setParameter(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, token);
+				pstmt.setString(2, folderid);
+				pstmt.setString(3, newfoldername);
+			}
+		});
+		return (Integer)lm.get(0).get("result");
+	}
+	
+	public static boolean RenameFile(final String token,final int folderid,final int fileid,final String namefilename) throws SQLException{
+		DBAction action = new DBAction();
+		List<HashMap<String,Object>> lm = action.exeQuery("SELECT UserRenameFile(?,?,?,?) AS result;", new DBAction.ParameterSetter() {
+			
+			@Override
+			public void setParameter(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, token);
+				pstmt.setInt(2, folderid);
+				pstmt.setInt(3, fileid);
+				pstmt.setString(4, namefilename);
+			}
+		});
+		int result = (Integer)lm.get(0).get("result");
+		return result==1;
+	}
+	
+	public static boolean DeleteFile(final String token,final int folderid,final int fileid) throws SQLException{
+		DBAction action = new DBAction();
+		List<HashMap<String,Object>> lm = action.exeQuery("SELECT UserDeleteFile(?,?,?) AS result;", new DBAction.ParameterSetter() {
+			
+			@Override
+			public void setParameter(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, token);
+				pstmt.setInt(2, folderid);
+				pstmt.setInt(3, fileid);
+			}
+		});
+		int result = (Integer)lm.get(0).get("result");
+		return result==1;
+	}
+	
+	public static boolean MoveFile(final String token,final int folder1id,final int folder2id,final int fileid) throws SQLException{
+		DBAction action = new DBAction();
+		List<HashMap<String,Object>> lm = action.exeQuery("SELECT UserMoveFile(?,?,?,?) AS result;", new DBAction.ParameterSetter() {
+			
+			@Override
+			public void setParameter(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, token);
+				pstmt.setInt(2, folder1id);
+				pstmt.setInt(3, folder2id);
+				pstmt.setInt(4, fileid);
+			}
+		});
+		int result = (Integer)lm.get(0).get("result");
+		return result==1;
+	}
+	
+	
 	
 }

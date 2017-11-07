@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class UserLoginAction extends BaseServletAction {
 
@@ -31,13 +33,13 @@ public class UserLoginAction extends BaseServletAction {
 			String password = getRequestParameter("password");
 			try {
 				// 数据库操作 - 获取用户的token(会触发SQLException)
-				String token = SqlQueryHelper.UserLogin(username, password);
+				JSONObject json = SqlDataProvider.UserLogin(username, password);
 
 				// 向ActionJson对象赋值
 				// 标记操作成功
 				aJson.setFlag(true);
 				// 设置内容为token
-				aJson.setContent(token);
+				aJson.setContent(json.toString());
 
 			} catch (SQLException e) {
 				// 标记操作失败

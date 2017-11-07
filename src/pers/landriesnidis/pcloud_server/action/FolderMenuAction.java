@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class FolderMenuAction extends BaseServletAction {
 
@@ -34,7 +34,7 @@ public class FolderMenuAction extends BaseServletAction {
 			
 			try {
 				// 数据库操作 - 用户登出(会触发SQLException)
-				JSONObject json = SqlQueryHelper.GetAllByFolderId(token, folderid);
+				JSONObject json = SqlDataProvider.GetAllByFolderId(token, folderid);
 
 				// 向ActionJson对象赋值
 				// 标记操作是否成功

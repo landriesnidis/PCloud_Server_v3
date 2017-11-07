@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class UserRegisterAction extends BaseServletAction {
 
@@ -31,7 +31,7 @@ public class UserRegisterAction extends BaseServletAction {
 			String password = getRequestParameter("password");
 			try {
 				// 数据库操作 - 获取用户的token(会触发SQLException)
-				String token = SqlQueryHelper.UserRegister(username, password);
+				String token = SqlDataProvider.UserRegister(username, password);
 
 				// 向ActionJson对象赋值
 				// 标记操作成功

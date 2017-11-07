@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class CreateFolderAction extends BaseServletAction {
 
@@ -32,7 +32,7 @@ public class CreateFolderAction extends BaseServletAction {
 			String newfoldername = getRequestParameter("newfoldername");
 			try {
 				// 数据库操作 - 创建文件夹(会触发SQLException)
-				int newFolderId = SqlQueryHelper.CreateFolder(token, folderid, newfoldername);;
+				int newFolderId = SqlDataProvider.CreateFolder(token, folderid, newfoldername);;
 
 				// 向ActionJson对象赋值
 				// 标记操作成功

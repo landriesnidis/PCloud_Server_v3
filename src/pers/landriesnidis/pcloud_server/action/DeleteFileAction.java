@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class DeleteFileAction extends BaseServletAction {
 
@@ -32,7 +32,7 @@ public class DeleteFileAction extends BaseServletAction {
 			String fileid = getRequestParameter("fileid");
 			try {
 				// 数据库操作 - 删除文件(会触发SQLException)
-				boolean result= SqlQueryHelper.DeleteFile(token, Integer.parseInt(folderid), Integer.parseInt(fileid));
+				boolean result= SqlDataProvider.DeleteFile(token, Integer.parseInt(folderid), Integer.parseInt(fileid));
 
 				// 向ActionJson对象赋值
 				// 标记操作成功

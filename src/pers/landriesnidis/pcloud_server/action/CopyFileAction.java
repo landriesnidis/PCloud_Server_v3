@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class CopyFileAction extends BaseServletAction {
 
@@ -33,7 +33,7 @@ public class CopyFileAction extends BaseServletAction {
 			String fileid = getRequestParameter("fileid");
 			try {
 				// 数据库操作 - 拷贝文件(会触发SQLException)
-				boolean result = SqlQueryHelper.CopyFile(token, folderid1, folderid2, fileid);
+				boolean result = SqlDataProvider.CopyFile(token, folderid1, folderid2, fileid);
 
 				// 向ActionJson对象赋值
 				// 标记操作成功

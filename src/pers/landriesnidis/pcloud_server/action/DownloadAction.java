@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import pers.landriesnidis.pcloud_server.ConfigManager;
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class DownloadAction extends BaseServletAction {
 
@@ -41,7 +41,7 @@ public class DownloadAction extends BaseServletAction {
 			
 			try {
 				// 数据库操作 - 通过文件Id获取文件的路径(会触发SQLException)
-				String path = SqlQueryHelper.GetFilePathById(token, fileid);
+				String path = SqlDataProvider.GetFilePathById(token, fileid);
 				//文件的真实路径
 				String realPath = ConfigManager.getManager().FILE_SAVE_PATH + path;
 				//文件对象

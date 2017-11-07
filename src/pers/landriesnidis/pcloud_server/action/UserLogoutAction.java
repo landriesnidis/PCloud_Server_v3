@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class UserLogoutAction extends BaseServletAction {
 
@@ -30,7 +30,7 @@ public class UserLogoutAction extends BaseServletAction {
 			String token = getRequestParameter("token");
 			try {
 				// 数据库操作 - 用户登出(会触发SQLException)
-				boolean b = SqlQueryHelper.UserLogout(token);
+				boolean b = SqlDataProvider.UserLogout(token);
 
 				// 向ActionJson对象赋值
 				// 标记操作是否成功

@@ -17,7 +17,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import pers.landriesnidis.pcloud_server.ConfigManager;
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 import pers.landriesnidis.pcloud_server.utils.MD5;
 
 public class UploadAction extends BaseServletAction {
@@ -42,19 +42,19 @@ public class UploadAction extends BaseServletAction {
 			int folderid = Integer.parseInt(getRequestParameter("folderid"));
 			
 			//查询服务器中是否已有该文件
-			if(!SqlQueryHelper.CheckFileExists(filemd5)){
+			if(!SqlDataProvider.CheckFileExists(filemd5)){
 				//如果服务器中没有相同文件则 接收上传的文件
 				receiveFile(request, new OnFileReceiveListener() {
 					@Override
 					public void onFinished(String md5,String filename, long size) throws SQLException {
-						SqlQueryHelper.FileUpload(token, filename, md5, size);
+						SqlDataProvider.FileUpload(token, filename, md5, size);
 					}
 				});
 			}
 			
 			//为用户添加所属的新文件记录
 			try {
-				SqlQueryHelper.UserAddFile(token, filemd5, filename, folderid);
+				SqlDataProvider.UserAddFile(token, filemd5, filename, folderid);
 			} catch (SQLException e) {	//这里的SQLException会报自定义的异常
 				// 标记操作失败
 				aJson.setFlag(false);

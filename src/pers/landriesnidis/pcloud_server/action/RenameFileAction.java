@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class RenameFileAction extends BaseServletAction {
 
@@ -33,7 +33,7 @@ public class RenameFileAction extends BaseServletAction {
 			String newfilename = getRequestParameter("newfilename");
 			try {
 				// 数据库操作 - 文件重命名(会触发SQLException)
-				boolean result = SqlQueryHelper.RenameFile(token, Integer.parseInt(folderid), Integer.parseInt(fileid), newfilename);
+				boolean result = SqlDataProvider.RenameFile(token, Integer.parseInt(folderid), Integer.parseInt(fileid), newfilename);
 
 				// 向ActionJson对象赋值
 				// 标记操作成功

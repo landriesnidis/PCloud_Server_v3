@@ -19,7 +19,6 @@ public class ActionJson {
 		this.action = action;
 	}
 	
-	
 	public ActionJson setAction(String action) {
 		this.action = action;
 		return this;

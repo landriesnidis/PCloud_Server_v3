@@ -1,6 +1,5 @@
 package pers.landriesnidis.pcloud_server.listener;
 
-import javax.decorator.Delegate;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -73,5 +72,11 @@ public class ActionRegisterServletContextListenerImpl  implements ServletContext
 		//移动文件
 		manager.registerAction(GET , MoveFileAction.class);
 		manager.registerAction(POST, MoveFileAction.class);
+		
+		//文件夹重命名
+		
+		//文件夹移动
+		
+		//文件夹删除
 	}
 }

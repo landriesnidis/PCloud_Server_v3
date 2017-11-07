@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pers.landriesnidis.pcloud_server.action.utils.ActionJson;
-import pers.landriesnidis.pcloud_server.database.SqlQueryHelper;
+import pers.landriesnidis.pcloud_server.database.SqlDataProvider;
 
 public class MoveFileAction extends BaseServletAction {
 
@@ -33,7 +33,7 @@ public class MoveFileAction extends BaseServletAction {
 			String fileid = getRequestParameter("fileid");
 			try {
 				// 数据库操作 - 移动文件(会触发SQLException)
-				boolean result= SqlQueryHelper.MoveFile(token, Integer.parseInt(folder1id), Integer.parseInt(folder2id),Integer.parseInt(fileid));
+				boolean result= SqlDataProvider.MoveFile(token, Integer.parseInt(folder1id), Integer.parseInt(folder2id),Integer.parseInt(fileid));
 
 				// 向ActionJson对象赋值
 				// 标记操作成功

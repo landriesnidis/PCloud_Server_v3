@@ -1,5 +1,7 @@
 package pers.landriesnidis.pcloud_server;
 
+import java.io.File;
+
 import pers.landriesnidis.pcloud_server.utils.PropertiesHelper;
 
 public class ConfigManager {
@@ -17,5 +19,11 @@ public class ConfigManager {
     	PropertiesHelper helper = new PropertiesHelper(ConfigManager.class.getResourceAsStream("configuration.properties"));
 		FILE_SAVE_PATH = helper.getValue("FILE_SAVE_PATH");
 		FILE_TEMP_PATH = helper.getValue("FILE_TEMP_PATH");
+		
+		File file;
+		file = new File(FILE_SAVE_PATH);
+		if(!file.exists())file.mkdirs();
+		file = new File(FILE_TEMP_PATH);
+		if(!file.exists())file.mkdirs();
     }
 }
